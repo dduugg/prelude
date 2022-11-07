@@ -98,11 +98,6 @@ by Prelude.")
 ;; warn when opening files bigger than 100MB
 (setq large-file-warning-threshold 100000000)
 
-;; preload the personal settings from `prelude-personal-preload-dir'
-(when (file-exists-p prelude-personal-preload-dir)
-  (message "[Prelude] Loading personal configuration files in %s..." prelude-personal-preload-dir)
-  (mapc 'load (directory-files prelude-personal-preload-dir 't "^[^#\.].*el$")))
-
 (message "[Prelude] Loading Prelude's core modules...")
 
 ;; load the core stuff
@@ -113,6 +108,11 @@ by Prelude.")
 (require 'prelude-mode)
 (require 'prelude-editor)
 (require 'prelude-global-keybindings)
+
+;; preload the personal settings from `prelude-personal-preload-dir'
+(when (file-exists-p prelude-personal-preload-dir)
+  (message "[Prelude] Loading personal configuration files in %s..." prelude-personal-preload-dir)
+  (mapc 'load (directory-files prelude-personal-preload-dir 't "^[^#\.].*el$")))
 
 ;; macOS specific settings
 (when (eq system-type 'darwin)
